@@ -1,0 +1,11 @@
+import { Router } from "express";
+import { createCar, deleteCar, getAdminCars, updateCar } from "../controllers/carController.js";
+import { protectAdmin } from "../middlewares/authMiddleware.js";
+import { upload } from "../middlewares/uploadMiddleware.js";
+const router = Router();
+router.use(protectAdmin);
+router.get("/", getAdminCars);
+router.post("/", upload.single("image"), createCar);
+router.put("/:id", upload.single("image"), updateCar);
+router.delete("/:id", deleteCar);
+export default router;

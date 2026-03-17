@@ -1,0 +1,7 @@
+import { Request, Response } from "express";
+import bcrypt from "bcryptjs";
+import prisma from "../config/db.js";
+import { generateToken } from "../utils/generateToken.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
+export const loginAdmin = asyncHandler(async (req: Request, res: Response) => { const { email, password } = req.body as { email?: string; password?: string; }; if (!email || !password) { res.status(400).json({ message: "Email and password are required" }); return; } const admin = await prisma.admin.findUnique({ where: { email } }); if (!admin) { res.status(401).json({ message: "Invalid credentials" }); return; } const isPasswordValid = await bcrypt.compare(password, admin.password); if (!isPasswordValid) { res.status(401).json({ message: "Invalid credentials" }); return; } const token = generateToken({ id: admin.id, email: admin.email }); res.status(200).json({ message: "Login successful", token, admin: { id: admin.id, name: admin.name, email: admin.email } }); });
+export const getAdminMe = asyncHandler(async (req: Request, res: Response) => { if (!req.admin) { res.status(401).json({ message: "Not authorized" }); return; } const admin = await prisma.admin.findUnique({ where: { id: req.admin.id }, select: { id: true, name: true, email: true, createdAt: true } }); if (!admin) { res.status(404).json({ message: "Admin not found" }); return; } res.status(200).json(admin); });

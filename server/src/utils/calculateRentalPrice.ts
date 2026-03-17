@@ -1,0 +1,1 @@
+export function calculateRentalPrice(pickupDate: Date, dropoffDate: Date, pricePerDay: number): number { const msPerDay = 1000 * 60 * 60 * 24; const difference = dropoffDate.getTime() - pickupDate.getTime(); const rawDays = Math.ceil(difference / msPerDay); return Math.max(1, rawDays) * pricePerDay; }

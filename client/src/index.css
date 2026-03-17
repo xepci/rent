@@ -1,0 +1,125 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 210 20% 98%;
+    --foreground: 215 50% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 215 50% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 215 50% 10%;
+
+    --primary: 220 60% 20%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 214 20% 92%;
+    --secondary-foreground: 220 60% 20%;
+
+    --muted: 214 20% 95%;
+    --muted-foreground: 215 16% 47%;
+
+    --accent: 214 30% 88%;
+    --accent-foreground: 220 60% 20%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214 25% 88%;
+    --input: 214 25% 88%;
+    --ring: 220 60% 20%;
+
+    --radius: 0.5rem;
+
+    /* Xepci brand tokens */
+    --xepci-navy: 220 60% 20%;
+    --xepci-navy-light: 220 50% 30%;
+    --xepci-silver: 214 15% 75%;
+    --xepci-silver-light: 214 15% 92%;
+    --xepci-gold: 40 60% 50%;
+    --xepci-success: 145 65% 42%;
+
+    --sidebar-background: 220 60% 15%;
+    --sidebar-foreground: 210 40% 92%;
+    --sidebar-primary: 210 40% 98%;
+    --sidebar-primary-foreground: 220 60% 15%;
+    --sidebar-accent: 220 50% 22%;
+    --sidebar-accent-foreground: 210 40% 92%;
+    --sidebar-border: 220 50% 25%;
+    --sidebar-ring: 214 80% 55%;
+
+    --font-display: 'Playfair Display', serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+
+  .dark {
+    --background: 220 60% 8%;
+    --foreground: 210 40% 98%;
+    --card: 220 55% 12%;
+    --card-foreground: 210 40% 98%;
+    --popover: 220 55% 12%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 210 40% 98%;
+    --primary-foreground: 220 60% 15%;
+    --secondary: 220 40% 18%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 220 40% 18%;
+    --muted-foreground: 215 20% 65%;
+    --accent: 220 40% 22%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 220 40% 22%;
+    --input: 220 40% 22%;
+    --ring: 213 27% 84%;
+    --sidebar-background: 220 60% 10%;
+    --sidebar-foreground: 210 40% 92%;
+    --sidebar-primary: 214 80% 55%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 220 50% 16%;
+    --sidebar-accent-foreground: 210 40% 92%;
+    --sidebar-border: 220 50% 18%;
+    --sidebar-ring: 214 80% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-body);
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+  }
+}
+
+@layer utilities {
+  .hero-gradient {
+    background: linear-gradient(
+      135deg,
+      hsl(var(--xepci-navy)) 0%,
+      hsl(var(--xepci-navy-light)) 100%
+    );
+  }
+  .silver-gradient {
+    background: linear-gradient(
+      135deg,
+      hsl(var(--xepci-silver-light)) 0%,
+      hsl(var(--xepci-silver)) 100%
+    );
+  }
+  .text-gradient {
+    background: linear-gradient(135deg, hsl(var(--xepci-navy)) 0%, hsl(var(--xepci-navy-light)) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}

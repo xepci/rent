@@ -1,0 +1,2 @@
+import { v2 as cloudinary } from "cloudinary";
+export function uploadBufferToCloudinary(fileBuffer: Buffer, folder = "xepcirent/cars"): Promise<string> { return new Promise((resolve, reject) => { const stream = cloudinary.uploader.upload_stream({ folder }, (error, result) => { if (error || !result) return reject(error || new Error("Cloudinary upload failed")); resolve(result.secure_url); }); stream.end(fileBuffer); }); }

@@ -1,0 +1,2 @@
+import { z } from "zod";
+export const settingsSchema = z.object({ companyName: z.string().min(2), email: z.string().email(), phone: z.string().min(3), address: z.string().min(3), workingHours: z.string().optional().or(z.literal("")), facebookUrl: z.string().url().optional().or(z.literal("")), instagramUrl: z.string().url().optional().or(z.literal("")), whatsappNumber: z.string().optional().or(z.literal("")) });

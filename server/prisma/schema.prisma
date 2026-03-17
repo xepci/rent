@@ -1,0 +1,80 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Admin {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Car {
+  id            String   @id @default(cuid())
+  name          String
+  brand         String?
+  category      String
+  imageUrl      String?
+  pricePerDay   Int
+  seats         Int
+  transmission  String
+  fuel          String
+  year          Int
+  description   String
+  available     Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  bookings      Booking[]
+}
+
+model Booking {
+  id              String   @id @default(cuid())
+  carId           String
+  customerName    String
+  customerEmail   String
+  customerPhone   String
+  pickupDate      DateTime
+  dropoffDate     DateTime
+  pickupLocation  String
+  dropoffLocation String
+  notes           String?
+  status          String   @default("pending")
+  totalPrice      Int
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  car             Car      @relation(fields: [carId], references: [id], onDelete: Cascade)
+}
+
+
+model Setting {
+  id             String   @id @default(cuid())
+  companyName    String
+  email          String
+  phone          String
+  address        String
+  workingHours   String?
+  facebookUrl    String?
+  instagramUrl   String?
+  whatsappNumber String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model ContactMessage {
+  id         String   @id @default(cuid())
+  name       String
+  email      String
+  phone      String?
+  subject    String?
+  message    String
+  isReplied  Boolean  @default(false)
+  repliedAt  DateTime?
+  createdAt  DateTime @default(now())
+}

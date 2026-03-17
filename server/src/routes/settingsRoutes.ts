@@ -1,0 +1,10 @@
+import { Router } from "express";
+import { getSettings, updateSettings } from "../controllers/settingsController.js";
+import { protectAdmin } from "../middlewares/authMiddleware.js";
+import { validateBody } from "../middlewares/validateMiddleware.js";
+import { settingsSchema } from "../validations/settingsValidation.js";
+const router = Router();
+router.use(protectAdmin);
+router.get("/", getSettings);
+router.put("/", validateBody(settingsSchema), updateSettings);
+export default router;
